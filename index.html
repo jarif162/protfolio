@@ -365,18 +365,18 @@
       }
 
       @media (max-width: 991px) {
-        .top-nav .navbar-collapse {
+        .top-nav .navbar-toggler {
           display: none;
+        }
+
+        .top-nav .navbar-collapse {
+          display: block !important;
           background: rgba(255, 255, 255, 0.96);
           border: 1px solid rgba(148, 163, 184, 0.35);
           border-radius: 0.9rem;
           box-shadow: 0 16px 28px -22px rgba(15, 23, 42, 0.8);
           margin-top: 0.6rem;
           padding: 0.6rem 0.85rem;
-        }
-
-        .top-nav .navbar-collapse.show {
-          display: block;
         }
 
         .navbar-nav {
@@ -1267,49 +1267,6 @@
         adminSection.scrollIntoView({ behavior: "smooth", block: "start" });
       }
 
-      function initResponsiveNavbar() {
-        const toggler = document.querySelector(".navbar-toggler");
-        const navCollapse = document.getElementById("navbarNav");
-        if (!toggler || !navCollapse) return;
-
-        toggler.setAttribute("aria-expanded", "false");
-
-        const toggleFallbackMenu = (forceState) => {
-          const shouldOpen =
-            typeof forceState === "boolean"
-              ? forceState
-              : !navCollapse.classList.contains("show");
-          navCollapse.classList.toggle("show", shouldOpen);
-          toggler.setAttribute("aria-expanded", shouldOpen ? "true" : "false");
-        };
-
-        const hasBootstrapCollapse =
-          window.bootstrap && typeof window.bootstrap.Collapse === "function";
-
-        if (!hasBootstrapCollapse) {
-          toggler.addEventListener("click", () => {
-            toggleFallbackMenu();
-          });
-        }
-
-        navCollapse.querySelectorAll(".nav-link").forEach((link) => {
-          link.addEventListener("click", () => {
-            if (window.innerWidth >= 992) return;
-
-            if (hasBootstrapCollapse) {
-              const collapse = window.bootstrap.Collapse.getOrCreateInstance(
-                navCollapse,
-                { toggle: false },
-              );
-              collapse.hide();
-              toggler.setAttribute("aria-expanded", "false");
-            } else {
-              toggleFallbackMenu(false);
-            }
-          });
-        });
-      }
-
       document.getElementById("year").textContent = new Date().getFullYear();
 
       document.querySelectorAll("[data-open-admin='true']").forEach((item) => {
@@ -1667,7 +1624,6 @@
         const content = getContent();
         applyContentToPage(content);
         fillEditorInputs(content);
-        initResponsiveNavbar();
         updateAuthUI();
         window.PortfolioMessages.renderAdminInbox("adminMessagesList");
         setEditorInputsDisabled(true);
