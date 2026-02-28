@@ -373,29 +373,43 @@
           display: block !important;
           background: rgba(255, 255, 255, 0.96);
           border: 1px solid rgba(148, 163, 184, 0.35);
-          border-radius: 0.9rem;
-          box-shadow: 0 16px 28px -22px rgba(15, 23, 42, 0.8);
-          margin-top: 0.6rem;
-          padding: 0.6rem 0.85rem;
+          border-radius: 0.6rem;
+          box-shadow: 0 10px 18px -18px rgba(15, 23, 42, 0.75);
+          margin-top: 0.12rem;
+          padding: 0.12rem 0.25rem;
         }
 
         .navbar-nav {
-          padding-top: 0.2rem;
+          padding-top: 0;
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 0.02rem 0.25rem;
           align-items: flex-start !important;
+          margin-bottom: 0 !important;
         }
 
         .navbar-nav .nav-item {
-          width: 100%;
+          width: auto;
+          margin: 0 !important;
         }
 
         .navbar-nav .nav-link {
-          padding-left: 0;
+          padding: 0.05rem 0.16rem;
           color: var(--text-main);
+          font-size: 0.8rem;
+          line-height: 1.15;
+          white-space: nowrap;
+        }
+
+        #logoutBtn {
+          padding: 0.1rem 0.28rem !important;
+          font-size: 0.74rem !important;
+          line-height: 1.1;
         }
 
         #home {
-          padding-top: 1rem !important;
-          padding-bottom: 1.75rem !important;
+          padding-top: 0.2rem !important;
+          padding-bottom: 0.8rem !important;
         }
 
         .display-4 {
@@ -471,7 +485,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg sticky-top border-bottom top-nav">
-      <div class="container py-1">
+      <div class="container py-0">
         <a class="navbar-brand fw-bold" href="#home">Jarif Foysal</a>
         <button
           class="navbar-toggler"
@@ -523,7 +537,7 @@
       </div>
     </nav>
 
-    <header id="home" class="container pt-3 pb-4 pt-lg-4 pb-lg-5">
+    <header id="home" class="container pt-2 pb-3 pt-lg-4 pb-lg-5">
       <div class="row align-items-center g-4">
         <div class="col-lg-7 reveal">
           <p class="text-uppercase fw-semibold text-teal-700 mb-2">
