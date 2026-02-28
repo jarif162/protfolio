@@ -488,7 +488,8 @@
           padding: 1rem !important;
         }
 
-        #projectsContainer .col-md-6,
+        #academicProjectsContainer .col-md-6,
+        #personalProjectsContainer .col-md-6,
         #certifications .col-md-4 {
           width: 100%;
         }
@@ -637,7 +638,10 @@
 
       <section id="projects" class="container py-5 reveal">
         <h2 class="section-title fw-bold h2 mb-4">Projects</h2>
-        <div id="projectsContainer" class="row g-4"></div>
+        <h3 class="h5 fw-bold mb-3 mt-4">Academic Projects</h3>
+        <div id="academicProjectsContainer" class="row g-4"></div>
+        <h3 class="h5 fw-bold mb-3 mt-5">Personal Projects</h3>
+        <div id="personalProjectsContainer" class="row g-4"></div>
       </section>
 
       <section id="education" class="container py-5 reveal">
@@ -1014,7 +1018,7 @@
       const CONTENT_KEY = "jarif_portfolio_content";
       const FIXED_PROFILE_IMAGE = "./pic.jpg";
       const CONTENT_SYNC_KEY = "jarif_portfolio_content_sync";
-      const CV_SYNC_VERSION = "cv_v1";
+      const CV_SYNC_VERSION = "cv_v3";
 
       const defaultContent = {
         about:
@@ -1050,30 +1054,98 @@
             description:
               "Built an ESP32-based adaptive traffic control system with multi-lane IR sensing, dynamic signal timing, and cloud-based data logging via HTTP.",
             link: "",
+            category: "academic",
           },
           {
             title: "IoT-Based Air Quality Monitoring System",
             description:
               "Designed a sensor-integrated IoT system for real-time environmental data acquisition and remote pollutant monitoring.",
             link: "",
+            category: "academic",
           },
           {
             title: "AI-Based Autonomous Grass Cutter",
             description:
               "Built an embedded autonomous navigation prototype with obstacle detection and sensor-driven control logic.",
             link: "",
+            category: "academic",
           },
           {
             title: "Student Expense Tracker (Flutter App)",
             description:
               "Developed a multi-user mobile app with authentication and budget tracking analytics.",
             link: "",
+            category: "academic",
           },
           {
             title: "JavaScript-Based Interactive Applications",
             description:
               "Developed multiple apps with DOM manipulation, REST API integration, local storage persistence, and event-driven state management.",
             link: "",
+            category: "academic",
+          },
+          {
+            title: "Portfolio Website",
+            description:
+              "Personal responsive portfolio site built with HTML, CSS, JavaScript, Bootstrap, and Tailwind utility styling.",
+            link: "https://github.com/jarif162/protfolio",
+            category: "personal",
+          },
+          {
+            title: "Project Fullstack",
+            description:
+              "Full-stack practice project repository focused on frontend structure, styling workflow, and deployment-ready project organization.",
+            link: "https://github.com/jarif162/project-fullstack",
+            category: "personal",
+          },
+          {
+            title: "React Project",
+            description:
+              "React + Vite project setup with component-based UI development and ESLint-based code quality configuration.",
+            link: "https://github.com/jarif162/react-project",
+            category: "personal",
+          },
+          {
+            title: "React Movie Downloader",
+            description:
+              "React-based movie utility app repository built with Vite; organized for fast development and reusable UI components.",
+            link: "https://github.com/jarif162/react-movie-downloader",
+            category: "personal",
+          },
+          {
+            title: "Expense Track Project",
+            description:
+              "Expense tracking web app project using JavaScript/React patterns with modular structure for managing income and expense flows.",
+            link: "https://github.com/jarif162/expance-track-project",
+            category: "personal",
+          },
+          {
+            title: "Responsive Landing Page",
+            description:
+              "Mobile-first landing page project built with HTML/CSS and responsive layout techniques for different screen sizes.",
+            link: "https://github.com/jarif162/responsive_landing_page",
+            category: "personal",
+          },
+          {
+            title: "Color Picker Extension",
+            description:
+              "JavaScript browser-extension style project focused on color selection and quick UI utility interactions.",
+            link: "https://github.com/jarif162/Color-Picker-extension",
+            category: "personal",
+          },
+          {
+            title: "Student Expense Tracker (Flutter)",
+            description:
+              "Flutter application repository for tracking student expenses with structured app setup and growth-ready feature architecture.",
+            link: "https://github.com/jarif162/student_expense_tracker",
+            category: "personal",
+          },
+          {
+            title: "React Redux Toolkit Practice",
+            description:
+              "State management practice project using React and Redux Toolkit with action/reducer flow for scalable UI state handling.",
+            link: "https://github.com/jarif162/React-Redux-toolkit",
+            category: "personal",
           },
         ],
       };
@@ -1131,11 +1203,18 @@
       }
 
       function renderProjects(projects) {
-        const container = document.getElementById("projectsContainer");
-        container.innerHTML = "";
+        const academicContainer = document.getElementById(
+          "academicProjectsContainer",
+        );
+        const personalContainer = document.getElementById(
+          "personalProjectsContainer",
+        );
+
+        academicContainer.innerHTML = "";
+        personalContainer.innerHTML = "";
 
         if (!projects.length) {
-          container.innerHTML =
+          academicContainer.innerHTML =
             '<div class="col-12"><p class="mb-0">No projects added yet.</p></div>';
           return;
         }
@@ -1154,7 +1233,12 @@
               ${linkHtml}
             </div>
           `;
-          container.appendChild(col);
+
+          if ((project.category || "personal") === "academic") {
+            academicContainer.appendChild(col);
+          } else {
+            personalContainer.appendChild(col);
+          }
         });
       }
 
