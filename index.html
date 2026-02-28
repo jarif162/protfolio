@@ -109,7 +109,17 @@
       .top-nav {
         background: rgba(255, 255, 255, 0.7);
         backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+        z-index: 1080;
+      }
+
+      .top-nav .navbar-toggler {
+        border-color: rgba(15, 23, 42, 0.2);
+      }
+
+      .top-nav .navbar-toggler:focus {
+        box-shadow: 0 0 0 0.2rem rgba(14, 165, 233, 0.22);
       }
 
       .navbar-brand {
@@ -340,8 +350,17 @@
       }
 
       @media (max-width: 991px) {
+        .top-nav .navbar-collapse {
+          background: rgba(255, 255, 255, 0.96);
+          border: 1px solid rgba(148, 163, 184, 0.35);
+          border-radius: 0.9rem;
+          box-shadow: 0 16px 28px -22px rgba(15, 23, 42, 0.8);
+          margin-top: 0.6rem;
+          padding: 0.6rem 0.85rem;
+        }
+
         .navbar-nav {
-          padding-top: 0.5rem;
+          padding-top: 0.2rem;
           align-items: flex-start !important;
         }
 
@@ -351,6 +370,7 @@
 
         .navbar-nav .nav-link {
           padding-left: 0;
+          color: var(--text-main);
         }
 
         #home {
