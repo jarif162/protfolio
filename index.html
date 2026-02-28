@@ -354,6 +354,18 @@
         display: none;
       }
 
+      [data-open-admin="true"],
+      #admin,
+      #editorPanel,
+      #logoutBtn,
+      #logoutBtnPanel,
+      #editModeBtn,
+      #saveChangesBtn,
+      #deleteChangesBtn,
+      #cancelEditBtn {
+        display: none !important;
+      }
+
       @media (max-width: 1199px) {
         .display-4 {
           font-size: 2.7rem;
@@ -521,9 +533,6 @@
               <a class="nav-link" href="#contact">Contact</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#admin" data-open-admin="true">Admin</a>
-            </li>
-            <li class="nav-item">
               <button
                 id="logoutBtn"
                 class="btn btn-sm btn-outline-danger hidden-section"
@@ -555,9 +564,6 @@
           </p>
           <div class="d-flex flex-wrap gap-3 hero-actions">
             <a class="btn btn-success px-4" href="#contact">Hire Me</a>
-            <a class="btn btn-outline-primary px-4" href="#admin" data-open-admin="true"
-              >Admin Login</a
-            >
           </div>
           <div class="d-flex gap-4 mt-4 flex-wrap hero-links">
             <a
@@ -1577,30 +1583,30 @@
 
           sendBtn.disabled = true;
           sendBtn.textContent = "Sending...";
+          const toEmail = ALLOWED_EMAIL;
+          const subject = `Portfolio Contact from ${name}`;
+          const body = message;
 
-          const saved = window.PortfolioMessages.addMessage({
-            name,
-            email,
-            message,
-          });
+          const gmailUrl =
+            "https://mail.google.com/mail/?view=cm&fs=1" +
+            `&to=${encodeURIComponent(toEmail)}` +
+            `&su=${encodeURIComponent(subject)}` +
+            `&body=${encodeURIComponent(body)}`;
+          const mailtoUrl =
+            `mailto:${encodeURIComponent(toEmail)}` +
+            `?subject=${encodeURIComponent(subject)}` +
+            `&body=${encodeURIComponent(body)}`;
 
-          if (!saved) {
-            status.textContent = "Message failed to save. Try again.";
-            status.style.color = "#b91c1c";
-            sendBtn.disabled = false;
-            sendBtn.textContent = "Send Message";
-            return;
+          const gmailWindow = window.open(gmailUrl, "_blank");
+          if (!gmailWindow) {
+            window.location.href = mailtoUrl;
           }
 
-          status.textContent = "Message sent successfully.";
+          status.textContent = "Opening Gmail compose...";
           status.style.color = "#166534";
           form.reset();
           sendBtn.disabled = false;
           sendBtn.textContent = "Send Message";
-
-          if (isLoggedIn()) {
-            window.PortfolioMessages.renderAdminInbox("adminMessagesList");
-          }
         });
 
       document
